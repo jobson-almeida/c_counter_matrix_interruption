@@ -35,7 +35,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(counter_matrix_interruption counter_matrix_interruption.c )
+add_executable(counter_matrix_interruption counter_matrix_interruption.c counter.c )
 
 pico_set_program_name(counter_matrix_interruption "counter_matrix_interruption")
 pico_set_program_version(counter_matrix_interruption "0.1")
