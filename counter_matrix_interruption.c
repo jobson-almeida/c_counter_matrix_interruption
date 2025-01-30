@@ -16,7 +16,7 @@
 #define BUTTON_A 5
 #define BUTTON_B 6
 
-// GPIO do botão de seleção do joystick, definido para alterar a cor dos LEDs 
+// GPIO do botão de seleção do joystick, definido para alterar a cor dos LEDs
 #define BUTTON_C 22
 
 // GPIOs dos LEDs
@@ -78,6 +78,9 @@ int main()
     // interrupções para exibir os frames que representam os números de 0-9
     gpio_set_irq_enabled_with_callback(BUTTON_A, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
     gpio_set_irq_enabled_with_callback(BUTTON_B, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
+
+    // interrupções para alterar a cor dos frames que representam os números de 0-9
+    gpio_set_irq_enabled_with_callback(BUTTON_C, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
 
     // inicializar dos LEDs - GPIO 11, 12 e 13
     gpio_init(LED_RED);
