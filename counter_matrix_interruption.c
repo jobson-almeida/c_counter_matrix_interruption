@@ -16,6 +16,9 @@
 #define BUTTON_A 5
 #define BUTTON_B 6
 
+// GPIO do botão de seleção do joystick, definido para alterar a cor dos LEDs 
+#define BUTTON_C 22
+
 // GPIOs dos LEDs
 #define LED_RED 11
 #define LED_GREEN 12
@@ -95,6 +98,11 @@ int main()
     gpio_init(BUTTON_B);
     gpio_set_dir(BUTTON_B, GPIO_IN);
     gpio_pull_up(BUTTON_B);
+
+    // inicializar o botão C - GPI22
+    gpio_init(BUTTON_C);
+    gpio_set_dir(BUTTON_C, GPIO_IN);
+    gpio_pull_up(BUTTON_C);
 
     show_number(pio, sm, r, g, b, intensity, 0);
 
