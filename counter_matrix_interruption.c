@@ -20,16 +20,16 @@
 #define BUTTON_C 22
 
 // GPIOs dos LEDs
-#define LED_RED 11
-#define LED_GREEN 12
-#define LED_BLUE 13
+#define LED_GREEN 11
+#define LED_BLUE 12
+#define LED_RED 13
 
 volatile uint32_t last_time = 0; // variável auxiliar para deboucing
 volatile int number_index = 0;   // index 0 corresponde ao número 0
 volatile int color_index = 0;
 
 PIO pio;
-uint sm; 
+uint sm;
 double intensity = 0.1;
 
 // cores primárias no padrão RGB
@@ -129,7 +129,7 @@ int main()
 
     while (true)
     {
-        gpio_put(LED_RED, !gpio_get(LED_RED));
+        pio_put(LED_RED, !gpio_get(LED_RED));
         gpio_put(LED_GREEN, !gpio_get(LED_GREEN));
         gpio_put(LED_BLUE, !gpio_get(LED_BLUE));
         sleep_ms(200);
