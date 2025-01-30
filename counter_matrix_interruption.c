@@ -17,7 +17,7 @@
 #define LED_GREEN 12
 #define LED_BLUE 13
 
-volatile uint32_t last_time = 0; // variável auxiliar para deboucing 
+volatile uint32_t last_time = 0; // variável auxiliar para deboucing
 
 static void counter_matrix_interruption_gpio_irq_handler(uint gpio, uint32_t events)
 {
@@ -42,6 +42,8 @@ static void counter_matrix_interruption_gpio_irq_handler(uint gpio, uint32_t eve
 int main()
 {
     stdio_init_all();
+
+    uint8_t r = 255, g = 0, b = 0;
 
     PIO pio = pio0;
     uint offset = pio_add_program(pio, &counter_matrix_interruption_program);
@@ -71,6 +73,8 @@ int main()
     gpio_init(BUTTON_B);
     gpio_set_dir(BUTTON_B, GPIO_IN);
     gpio_pull_up(BUTTON_B);
+
+    show_number(pio, sm, r, g, b, 0.1, 0);
 
     while (true)
     {

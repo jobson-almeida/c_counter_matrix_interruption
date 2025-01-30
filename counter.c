@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include "pico/stdlib.h"
+#include "hardware/pio.h"
+
 #define NUM_PIXELS 25 // quantidade de LEds da matriz
 
 // frames da animação no formato hexadecimal que representam cada um dos números de 0 a 9, específicos para a matriz 5x5 da placa de desenvolvimento BitLogLab
@@ -32,4 +36,9 @@ double *apply_intensity_frame(uint32_t frame, double intensity)
     }
     free(frames);
     return frames;
+}
+
+void show_number(PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b, double intensity, size_t frame)
+{
+    printf("%d %d %d %d %.1f %d\n", sm, r, g, b, intensity, frame);
 }
