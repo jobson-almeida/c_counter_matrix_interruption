@@ -7,7 +7,7 @@
 // GPIO da matriz de LEDs
 #define MATRIX 7
 
-// GPIOs dos botões para incrementar e decrementar as representações numéricas (0-9) 
+// GPIOs dos botões para incrementar e decrementar as representações numéricas (0-9)
 // na matriz de LEDs
 #define BUTTON_A 5
 #define BUTTON_B 6
@@ -16,6 +16,28 @@
 #define LED_RED 11
 #define LED_GREEN 12
 #define LED_BLUE 13
+
+volatile uint32_t last_time = 0; // variável auxiliar para deboucing 
+
+static void counter_matrix_interruption_gpio_irq_handler(uint gpio, uint32_t events)
+{
+    uint32_t current_time = to_us_since_boot(get_absolute_time());
+    // verifica se passou tempo o bastante desde o último evento
+    if (current_time - last_time > 250000) // 250 ms de debouncing
+    {
+        last_time = current_time; // atualiza o tempo do último evento
+
+        if (gpio_get(BUTTON_A) == 0)
+        {
+            printf("Interrupção A ocorreu no pino %d, no evento %d \n", gpio, events);
+        }
+        if (gpio_get(BUTTON_B) == 0)
+        {
+            printf("Interrupção B ocorreu no pino %d, no evento %d \n", gpio, events);
+        }
+    }
+    gpio_acknowledge_irq(gpio, events); // limpa a interrupção
+}
 
 int main()
 {
@@ -26,7 +48,11 @@ int main()
     uint sm = pio_claim_unused_sm(pio, true);
     counter_matrix_interruption_program_init(pio, sm, offset, MATRIX);
 
-// inicializar dos LEDs - GPIO 11, 12 e 13 ////////////////////////////
+    // interrupções para exibir os frames que representam os números de 0-9
+    gpio_set_irq_enabled_with_callback(BUTTON_A, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
+    gpio_set_irq_enabled_with_callback(BUTTON_B, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
+
+    // inicializar dos LEDs - GPIO 11, 12 e 13 ////////////////////////////
     gpio_init(LED_RED);
     gpio_set_dir(LED_RED, GPIO_OUT);
 
@@ -36,15 +62,15 @@ int main()
     gpio_init(LED_BLUE);
     gpio_set_dir(LED_BLUE, GPIO_OUT);
 
-    // inicializar o botão A - GPIO5  
+    // inicializar o botão A - GPIO5
     gpio_init(BUTTON_A);
     gpio_set_dir(BUTTON_A, GPIO_IN);
     gpio_pull_up(BUTTON_A);
 
-    // inicializar o botão B - GPIO6  
+    // inicializar o botão B - GPIO6
     gpio_init(BUTTON_B);
     gpio_set_dir(BUTTON_B, GPIO_IN);
-    gpio_pull_up(BUTTON_B); 
+    gpio_pull_up(BUTTON_B);
 
     while (true)
     {

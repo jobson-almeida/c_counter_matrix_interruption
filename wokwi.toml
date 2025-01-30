@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/counter_matrix_interruption.uf2'
+elf = 'build/counter_matrix_interruption.elf' 
