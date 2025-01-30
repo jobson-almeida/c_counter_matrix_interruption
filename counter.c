@@ -8,8 +8,7 @@
 //                                           0          1          2          3          4          5          6          7          8          9
 uint32_t counter_animation_frames[10] = {0x1FCCF3F, 0x03C0F03, 0x1FC7C7F, 0x1FC3F1F, 0x1BDFF03, 0x1F1FF1F, 0x1F1FF7F, 0x1FC0F03, 0x1FCFF3F, 0x1FCFF1F};
 
-// função para configurar intensidade dos LEDs dos frames
-double *apply_intensity_frame(uint32_t frame, double intensity)
+ double *apply_intensity_frame(uint32_t frame, double intensity)
 {
     double *frames = (double *)calloc(1, sizeof(double));
     size_t counter = 0;
@@ -57,6 +56,6 @@ void apply_color_frame(double *number, PIO pio, uint sm, uint8_t r, uint8_t g, u
 
 void show_number(PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b, double intensity, size_t frame)
 {
-    //printf("%d %d %d %d %.1f %d\n", sm, r, g, b, intensity, frame);
-    apply_color_frame(NULL, pio, sm, r, g, b);
+    // printf("%d %d %d %d %.1f %d\n", sm, r, g, b, intensity, frame);
+    apply_color_frame(apply_intensity_frame(counter_animation_frames[frame], intensity), pio, sm, r, g, b);
 }
