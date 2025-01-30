@@ -24,10 +24,10 @@ uint32_t counter_animation_frames[10] = {0x1FCCF3F, 0x03C0F03, 0x1FC7C7F, 0x1FC3
 
     for (size_t j = 0; j < NUM_PIXELS; j++)
     {
-        // NÃO UTILIZAR EM PRODUÇÃO
+        // APENAS PARA DEBUGGING
         // printf("%b\t & \t%025b\t", frame, 0x1 << (NUM_PIXELS - j) - 1);
         int binary = (int)frame & (0x1 << ((NUM_PIXELS - j) - 1));
-        // NÃO UTILIZAR EM PRODUÇÃO
+        // APENAS PARA DEBUGGING
         // printf("= \t%025b\n", binary);
 
         if (binary > 0)
@@ -38,7 +38,7 @@ uint32_t counter_animation_frames[10] = {0x1FCCF3F, 0x03C0F03, 0x1FC7C7F, 0x1FC3
         {
             frames[counter] = 0.0;
         }
-        // NÃO UTILIZAR EM PRODUÇÃO
+        // APENAS PARA DEBUGGING
         // printf("%025b\t %.1f\n", binary, frames[counter]);
         counter++;
     }
@@ -53,18 +53,20 @@ uint32_t rgb(uint8_t r, uint8_t g, uint8_t b)
            (uint32_t)(b << 8);
 }
 
-void apply_color_frame(double *number, PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b)
+void apply_color_frame(double *frame, PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b)
 {
     for (size_t i = 0; i < NUM_PIXELS; ++i)
     {
-        // printf("%.1f\n", number[(NUM_PIXELS-1) - i]);
-        uint32_t color = rgb(number[(NUM_PIXELS - 1) - i] * r, number[(NUM_PIXELS - 1) - i] * g, number[(NUM_PIXELS - 1) - i] * b);
+        // APENAS PARA DEBUGGING
+        // printf("%.1f\n", frame[(NUM_PIXELS-1) - i]);
+        uint32_t color = rgb(frame[(NUM_PIXELS - 1) - i] * r, frame[(NUM_PIXELS - 1) - i] * g, frame[(NUM_PIXELS - 1) - i] * b);
         pio_sm_put_blocking(pio, sm, color);
     }
 }
 
 void show_number(PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b, double intensity, size_t frame)
 {
+    // APENAS PARA DEBUGGING
     // printf("%d %d %d %d %.1f %d\n", sm, r, g, b, intensity, frame);
     apply_color_frame(apply_intensity_frame(counter_animation_frames[frame], intensity), pio, sm, r, g, b);
 }
