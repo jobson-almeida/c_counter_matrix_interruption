@@ -38,7 +38,17 @@ double *apply_intensity_frame(uint32_t frame, double intensity)
     return frames;
 }
 
+void apply_color_frame(double *number, PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b)
+{
+    for (size_t i = 0; i < NUM_PIXELS; ++i)
+    {
+        printf("%.1f\n", number[(NUM_PIXELS - 1) - i]);
+        printf("%d %d %d\n", r, g, b);
+    }
+}
+
 void show_number(PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b, double intensity, size_t frame)
 {
-    printf("%d %d %d %d %.1f %d\n", sm, r, g, b, intensity, frame);
+    //printf("%d %d %d %d %.1f %d\n", sm, r, g, b, intensity, frame);
+    apply_color_frame(NULL, pio, sm, r, g, b);
 }
