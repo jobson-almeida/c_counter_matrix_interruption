@@ -25,40 +25,57 @@
 #define LED_BLUE 13
 
 volatile uint32_t last_time = 0; // variável auxiliar para deboucing
-volatile int counter = 0;
+volatile int number_index = 0;   // index 0 corresponde ao número 0
+volatile int color_index = 0;
 
 PIO pio;
-uint sm;
-uint8_t r = 0, g = 0, b = 255;
+uint sm; 
 double intensity = 0.1;
+
+// cores primárias no padrão RGB
+RGBColor color[15] = {
+    {255, 0, 0}, {255, 255, 255}, {0, 255, 0}, {0, 0, 255}, {255, 255, 0}, {0, 255, 255}, {255, 0, 255}, {192, 192, 192}, {128, 128, 128}, {128, 0, 0}, {128, 128, 0}, {0, 128, 0}, {128, 0, 128}, {0, 128, 128}, {0, 0, 128}};
 
 static void counter_matrix_interruption_gpio_irq_handler(uint gpio, uint32_t events)
 {
     uint32_t current_time = to_us_since_boot(get_absolute_time());
-    // verifica se passou tempo o bastante desde o último evento
+    // verificar se passou tempo o bastante desde o último evento
     if (current_time - last_time > 250000) // 250 ms de debouncing
     {
         last_time = current_time; // atualiza o tempo do último evento
 
         if (gpio_get(BUTTON_A) == 0)
         {
-            if (counter < 9)
-                counter++;
+            if (number_index < 9)
+                number_index++;
             else
-                counter = 0;
+                number_index = 0;
 
-            // printf("número %d\n", counter);
-            show_number(pio, sm, r, g, b, intensity, counter);
+            // printf("número %d\n", number_index);
+            show_number(pio, sm, color[color_index].r, color[color_index].g, color[color_index].b, intensity, number_index);
         }
         if (gpio_get(BUTTON_B) == 0)
         {
-            if (counter > 0)
-                counter--;
+            if (number_index > 0)
+                number_index--;
             else
-                counter = 9;
+                number_index = 9;
 
-            // printf("número %d\n", counter);
-            show_number(pio, sm, r, g, b, intensity, counter);
+            // printf("número %d\n", number_index);
+            show_number(pio, sm, color[color_index].r, color[color_index].g, color[color_index].b, intensity, number_index);
+        }
+        if (gpio_get(BUTTON_C) == 0)
+        {
+            if (color_index < 14)
+            {
+                color_index++;
+            }
+            else
+            {
+                color_index = 0;
+            }
+            // printf("color %d\n", color_index);
+            show_number(pio, sm, color[color_index].r, color[color_index].g, color[color_index].b, intensity, number_index);
         }
     }
     gpio_acknowledge_irq(gpio, events); // limpa a interrupção
@@ -75,11 +92,11 @@ int main()
     sm = pio_claim_unused_sm(pio, true);
     counter_matrix_interruption_program_init(pio, sm, offset, MATRIX);
 
-    // interrupções para exibir os frames que representam os números de 0-9
+    // habilitar as interrupções para exibir os frames que representam os números de 0-9
     gpio_set_irq_enabled_with_callback(BUTTON_A, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
     gpio_set_irq_enabled_with_callback(BUTTON_B, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
 
-    // interrupções para alterar a cor dos frames que representam os números de 0-9
+    // habilitar a interrupção para alterar a cor dos LEDs
     gpio_set_irq_enabled_with_callback(BUTTON_C, GPIO_IRQ_EDGE_FALL, true, &counter_matrix_interruption_gpio_irq_handler);
 
     // inicializar dos LEDs - GPIO 11, 12 e 13
@@ -107,7 +124,8 @@ int main()
     gpio_set_dir(BUTTON_C, GPIO_IN);
     gpio_pull_up(BUTTON_C);
 
-    show_number(pio, sm, r, g, b, intensity, 0);
+    // exibir o primeiro número do vetor - 0
+    show_number(pio, sm, color[color_index].r, color[color_index].g, color[color_index].b, intensity, 0);
 
     while (true)
     {

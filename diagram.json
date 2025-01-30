@@ -106,6 +106,21 @@
       "left": 114.65,
       "rotate": 90,
       "attrs": { "value": "100" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text3",
+      "top": 240,
+      "left": 182.4,
+      "attrs": { "text": "BOTÃO ALTERAR COR" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn3",
+      "top": 230.3,
+      "left": 118.7,
+      "rotate": 90,
+      "attrs": { "color": "blue" }
     }
   ],
   "connections": [
@@ -206,7 +221,9 @@
     [ "btn1:1.l", "pico:GP6", "#8f4814", [ "h-19.2", "v96" ] ],
     [ "btn1:2.l", "pico:GND.2", "black", [ "v9.6", "h-28.6" ] ],
     [ "btn2:2.r", "pico:GP5", "green", [ "v19.4", "h-57.8" ] ],
-    [ "btn2:1.r", "pico:GND.1", "black", [ "v29", "h-38.4" ] ]
+    [ "btn2:1.r", "pico:GND.1", "black", [ "v29", "h-38.4" ] ],
+    [ "pico:GND.5", "btn3:2.l", "black", [ "v38.71", "h-86.24" ] ],
+    [ "pico:GP22", "btn3:1.l", "#8f4814", [ "v0" ] ]
   ],
   "dependencies": {}
 }
