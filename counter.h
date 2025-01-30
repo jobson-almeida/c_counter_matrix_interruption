@@ -20,15 +20,15 @@ uint32_t rgb(uint8_t r, uint8_t g, uint8_t b);
 
 /**
  * @brief Função que permite aplicar uma determinada cor, no padrão RGB, ao led
- * @note O efeito luminoso produzido pela cor será influencido pela intensidade predefinida nos framee
- * @param number Valor referente ao frame do número que se deseja aplicar a cor
+ * @note O efeito luminoso produzido pela cor será influencido pela intensidade definida nos framee
+ * @param frame Valor referente ao número que se deseja aplicar a cor
  * @param pio Valor referente a interface PIO
  * @param sm Valor referente a máquina de estados
  * @param r Valor referente a cor vermelha
  * @param g Valor referente a cor verde
  * @param b Valor referente a cor azul
  */
-void apply_color_frame(double *number, PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b);
+void apply_color_frame(double *frame, PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b);
 
 /**
  * @brief Função responsável por exibir um determinado número na matriz de LEDs
