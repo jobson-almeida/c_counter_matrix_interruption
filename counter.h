@@ -1,11 +1,11 @@
 #ifndef COUNTER
 #define COUNTER
- 
+
 #include "hardware/pio.h"
 
 /**
  * @brief Função que permite configurar a intensidade dos leds de um frame
- * @param frame Item da animação que se deseja aplicar a intensidade 
+ * @param frame Item da animação que se deseja aplicar a intensidade
  * @param intensity Valor atribuido a intensidade de brilho do LED de 0.0 à 1.0
  */
 double *apply_intensity_frame(uint32_t frame, double intensity);
@@ -41,5 +41,18 @@ void apply_color_frame(double *frame, PIO pio, uint sm, uint8_t r, uint8_t g, ui
  * @param frame Valor referente ao número (0-9) que se deseja visualizar na matriz
  */
 void show_number(PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b, double intensity, size_t frame);
+
+/**
+ * @brief Tipo de dado para agrupar valor RGB
+ * @param r Valor referente a cor vermelha
+ * @param g Valor referente a cor verde
+ * @param b Valor referente a cor azul
+ */
+typedef struct
+{
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+} RGBColor;
 
 #endif
