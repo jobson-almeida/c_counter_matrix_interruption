@@ -19,9 +19,7 @@
 // GPIO do botão de seleção do joystick, definido para alterar a cor dos LEDs
 #define BUTTON_C 22
 
-// GPIOs dos LEDs
-#define LED_GREEN 11
-#define LED_BLUE 12
+// GPIOs dos LEDs 
 #define LED_RED 13
 
 volatile uint32_t last_time = 0; // variável auxiliar para deboucing
@@ -102,13 +100,7 @@ int main()
     // inicializar dos LEDs - GPIO 11, 12 e 13
     gpio_init(LED_RED);
     gpio_set_dir(LED_RED, GPIO_OUT);
-
-    gpio_init(LED_GREEN);
-    gpio_set_dir(LED_GREEN, GPIO_OUT);
-
-    gpio_init(LED_BLUE);
-    gpio_set_dir(LED_BLUE, GPIO_OUT);
-
+ 
     // inicializar o botão A - GPIO5
     gpio_init(BUTTON_A);
     gpio_set_dir(BUTTON_A, GPIO_IN);
@@ -129,9 +121,7 @@ int main()
 
     while (true)
     {
-        pio_put(LED_RED, !gpio_get(LED_RED));
-        gpio_put(LED_GREEN, !gpio_get(LED_GREEN));
-        gpio_put(LED_BLUE, !gpio_get(LED_BLUE));
+        gpio_put(LED_RED, !gpio_get(LED_RED)); 
         sleep_ms(200);
     }
 }
