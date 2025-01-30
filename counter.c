@@ -38,12 +38,20 @@ double *apply_intensity_frame(uint32_t frame, double intensity)
     return frames;
 }
 
+uint32_t rgb(uint8_t r, uint8_t g, uint8_t b)
+{
+    return ((uint32_t)(r) << 16) |
+           ((uint32_t)(g) << 24) |
+           (uint32_t)(b << 8);
+}
+
 void apply_color_frame(double *number, PIO pio, uint sm, uint8_t r, uint8_t g, uint8_t b)
 {
     for (size_t i = 0; i < NUM_PIXELS; ++i)
     {
-        printf("%.1f\n", number[(NUM_PIXELS - 1) - i]);
-        printf("%d %d %d\n", r, g, b);
+        // printf("%.1f\n", number[(NUM_PIXELS-1) - i]);
+        uint32_t color = rgb(number[(NUM_PIXELS - 1) - i] * r, number[(NUM_PIXELS - 1) - i] * g, number[(NUM_PIXELS - 1) - i] * b);
+        pio_sm_put_blocking(pio, sm, color);
     }
 }
 
