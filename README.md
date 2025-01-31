@@ -25,7 +25,7 @@ Enquanto isso, no ciclo **normal** do loop infinito do código, o vermelho do LE
 ## Resumo das funcionalidades
 
 - Redefinir a representação dos bits atribuindo valores de intensidades entre 0.0 e 1.0 e consequentemente aos LEDs de cada frame (número).
-- Aplicar uma cor aos frames marcados com intensidades diferentes de 0.0, e por consequência, aos seus LEDs da matriz.
+- Aplicar uma cor aos frames marcados com intensidades diferentes de 0.0, e por consequência, aos LEDs correspondentes na matriz.
 - Incrementar e decrementar de forma ordenada o número exibido na matriz por interrupção.
 - Alternar entre 15 cores possíveis e aplicá-las aos LEDs de cada frame por interrupção.
 
