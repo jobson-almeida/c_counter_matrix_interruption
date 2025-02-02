@@ -1,4 +1,4 @@
-# Contador em matrix RGB por interrupção
+# Contador em matriz RGB por interrupção
     
 
 
