@@ -31,5 +31,5 @@ Enquanto isso, no ciclo **normal** do loop infinito do código, o vermelho do LE
 
 
 ## Resultado
-O vídeo do programa em execução pode ser conferido no endereço [https://youtube.com](https://youtube.com)
+O vídeo do programa em execução pode ser conferido no endereço [https://youtube.com/shorts/eGqKVdbHrbY?feature=share](https://youtube.com/shorts/eGqKVdbHrbY?feature=share)
  
