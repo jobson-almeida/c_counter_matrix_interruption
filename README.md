@@ -15,10 +15,10 @@ A efeito de intensidade dos LEDs está relacionado aos valores previamente confi
 
 Nesse ponto, por meio da função **apply_color_frame**, o número representado na matriz terá assumido a cor de index 0, de um total delimitado até 14, correspondente ao primeiro item do vetor de cores **color**. 
  
-A razão pela qual foi criado um vetor de cores foi, por opção, utilizar o joystick presente na BitDogLAb, e atribuir ao seu botão de seleção a responsabilidade de alterar a cor dos LEDs utilizados pelos frames. 
-Definido como **BUTTON_C** pelo programa, ele assume a habilidade de coletar o valor RGB contido no vetor de cores, de forma incremental ordenada, e aplicar aos LEDs, também por meio de interrupção.
+A razão pela qual foi criado um vetor de cores foi, por opção, utilizar o joystick presente na BitDogLab, e atribuir ao seu botão de seleção a responsabilidade de alterar a cor dos LEDs utilizados pelos frames. 
+Definido como **BUTTON_C** pelo programa, ele sua ação está em coletar o valor RGB contido no vetor de cores, de forma incremental ordenada, e aplicar aos LEDs, também por meio de interrupção.
 
-Enquanto isso, no ciclo **normal** do loop infinito do código, o vermelho do LED RGB da placa pisca 5 vezes por segundo.
+Enquanto isso, na função **main**, em seu loop infinito, o vermelho do LED RGB da placa pisca 5 vezes por segundo.
 
 <br>
  
