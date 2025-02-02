@@ -20,7 +20,7 @@ Definido como **BUTTON_C** pelo programa, ele assume a habilidade de coletar o v
 
 Enquanto isso, no ciclo **normal** do loop infinito do código, o vermelho do LED RGB da placa pisca 5 vezes por segundo.
 
-<br><br>
+<br>
  
 ## Resumo das funcionalidades
 
@@ -29,7 +29,8 @@ Enquanto isso, no ciclo **normal** do loop infinito do código, o vermelho do LE
 - Incrementar e decrementar de forma ordenada o número exibido na matriz por interrupção.
 - Alternar entre 15 cores possíveis e aplicá-las aos LEDs de cada frame por interrupção.
 
+<br>
 
 ## Resultado
-O vídeo do programa em execução pode ser conferido no endereço [https://youtube.com/shorts/eGqKVdbHrbY?feature=share](https://youtube.com/shorts/eGqKVdbHrbY?feature=share)
+O vídeo do programa em execução pode ser conferido no endereço [https://youtu.be/47X7Vd2pLbU](https://youtu.be/47X7Vd2pLbU)
  
