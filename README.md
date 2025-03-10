@@ -28,9 +28,3 @@ Enquanto isso, na função **main**, em seu loop infinito, o vermelho do LED RGB
 - Aplicar uma cor aos frames marcados com intensidades diferentes de 0.0, e por consequência, aos LEDs correspondentes na matriz.
 - Incrementar e decrementar de forma ordenada o número exibido na matriz por interrupção.
 - Alternar entre 15 cores possíveis e aplicá-las aos LEDs de cada frame por interrupção.
-
-<br>
-
-## Resultado
-O vídeo do programa em execução pode ser conferido no endereço [https://youtu.be/47X7Vd2pLbU](https://youtu.be/47X7Vd2pLbU)
- 
